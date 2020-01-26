@@ -1,4 +1,4 @@
-from sympy import symbols, solve, Eq, pretty_print, sympify, expand
+from sympy import symbols, solve, Eq, pretty_print
 from sympy.functions import *
 
 s1 = symbols("s1")

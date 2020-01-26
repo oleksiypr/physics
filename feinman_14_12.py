@@ -1,11 +1,9 @@
-from sympy import symbols, solve, Eq, pretty_print
-from sympy.physics.units import Quantity
 import sympy.physics.units as un
-from sympy.physics.units import convert_to
-from sympy.physics.units.systems import SI
+from sympy import symbols, solve, Eq, pretty_print
 from sympy.functions import *
-from sympy.physics.units.definitions.unit_definitions import One
 from sympy.interactive import init_printing
+from sympy.physics.units import Quantity
+from sympy.physics.units import convert_to
 from utils import *
 
 init_printing()
