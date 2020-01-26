@@ -5,15 +5,6 @@ from sympy.interactive import init_printing
 
 init_printing()
 
-"""
-x = np.arange(1., 2., 0.01)
-plt.plot(x, 2 - x)
-
-x = np.arange(0., 1., 0.01)
-plt.plot(x, x ** 2)
-plt.show()
-"""
-
 G = symbols('G')
 r = symbols('r')
 R = symbols('R')
