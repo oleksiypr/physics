@@ -60,3 +60,28 @@ C = solve(eqC, C)[0]
 # assert edge case for r = R
 assert C.subs(r, R) + G * M/R**2 == 0
 
+# suppose we wave such unis that GM /R **3 = 1, and R = 1
+
+# potential
+
+rs = np.linspace(0., 1.)
+psi = psi.subs({G: 1., M: 1., R: 1.})
+psi = [psi.subs(r, r1) for r1 in rs]
+
+plt.plot(rs, psi)
+
+rs = np.linspace(1., 4.)
+plt.plot(rs, - 1 / rs)
+
+# field
+
+rs = np.linspace(0., 1.)
+C = abs(C.subs({G: 1., M: 1., R: 1.}))
+C = [C.subs(r, r1) for r1 in rs]
+
+plt.plot(rs, C)
+
+rs = np.linspace(1., 4.)
+plt.plot(rs, 1 / rs ** 2)
+
+plt.show()
