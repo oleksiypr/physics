@@ -1,4 +1,5 @@
 import numpy as np
+import sympy as sym
 import matplotlib.pyplot as plt
 from sympy import symbols, pretty_print, Function, Eq, integrate, simplify, solve, Integral, Derivative, dsolve
 from sympy.interactive import init_printing
@@ -53,23 +54,21 @@ assert psi.subs(r, R) + G * M/R == 0
 
 C = Function('C')(r)
 pretty_print(Eq(C, -  Derivative(Function('psi')(r), r)))
-eqC = Eq(C, - psi.diff(r))
-pretty_print(eqC)
+eq_C = Eq(C, - psi.diff(r))
+pretty_print(eq_C)
 
-C = solve(eqC, C)[0]
+C = solve(eq_C, C)[0]
 
 # assert edge case for r = R
 assert C.subs(r, R) + G * M/R**2 == 0
 
 # suppose we wave such unis that GM /R **3 = 1, and R = 1
-
-# potential
+# plot potential `psi` vs distance to the center, r:
 
 rs = np.linspace(0., 1.)
 psi = psi.subs({G: 1., M: 1., R: 1.})
-psi = [psi.subs(r, r1) for r1 in rs]
-
-plt.plot(rs, psi)
+f_psi = sym.lambdify(r, psi)
+plt.plot(rs, f_psi(rs))
 
 rs = np.linspace(1., 4.)
 plt.plot(rs, - 1 / rs)
@@ -78,9 +77,8 @@ plt.plot(rs, - 1 / rs)
 
 rs = np.linspace(0., 1.)
 C = abs(C.subs({G: 1., M: 1., R: 1.}))
-C = [C.subs(r, r1) for r1 in rs]
-
-plt.plot(rs, C)
+f_C = sym.lambdify(r, C)
+plt.plot(rs, f_C(rs))
 
 rs = np.linspace(1., 4.)
 plt.plot(rs, 1 / rs ** 2)
