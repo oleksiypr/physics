@@ -24,8 +24,8 @@ psi_1 = Function('psi_1')(r)
 psi_2 = Function('psi_2')(r)
 psi = Function('psi')(r)
 
-eqP = Eq(psi, psi_1 + psi_2)
-pretty_print(eqP)
+eq_psi = Eq(psi, psi_1 + psi_2)
+pretty_print(eq_psi)
 
 pretty_print('''\nFor inner ball mass is:''')
 
@@ -33,8 +33,8 @@ m = M * r**3 /R**3
 pretty_print(m)
 
 pretty_print('\nThen:')
-eqP = eqP.subs(psi_1, - G * m / r)
-pretty_print(eqP)
+eq_psi = eq_psi.subs(psi_1, - G * m / r)
+pretty_print(eq_psi)
 
 pretty_print('''\n For outer:''')
 r1 = symbols('r1')
@@ -43,11 +43,11 @@ pretty_print(Eq(psi_2, Integral( - G * der_m/r1, (r1, r, R))))
 p2 = integrate( - G * der_m/r1, (r1, r, R))
 p2 = simplify(p2)
 
-eqP = eqP.subs(psi_2, p2)
-pretty_print(simplify(eqP))
+eq_psi = eq_psi.subs(psi_2, p2)
+pretty_print(simplify(eq_psi))
 
 pretty_print('''Then: ''')
-psi = solve(eqP, psi)[0]
+psi = solve(eq_psi, psi)[0]
 
 # assert edge case for r = R
 assert psi.subs(r, R) + G * M/R == 0
