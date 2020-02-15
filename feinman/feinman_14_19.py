@@ -1,9 +1,6 @@
-import numpy as np
-import sympy as sym
-import matplotlib.pyplot as plt
-from sympy import symbols, pretty_print, Function, Eq, integrate, simplify, solve, Integral, Derivative, dsolve
-from sympy.interactive import init_printing
+from sympy import symbols, pretty_print, Eq, solve
 from sympy.functions import *
+from sympy.interactive import init_printing
 
 init_printing()
 
@@ -60,15 +57,16 @@ T, _, _ = solve([
     eq_T
 ], T, sigma, v)[1]
 
-pretty_print(T**2)
+pretty_print(Eq(symbols('T')**2, T**2))
 print('\n')
 
 print('c).')
+
 epsilon = symbols('epsilon')
 epsilon_eq = Eq(epsilon, E/m)
 pretty_print(epsilon_eq)
-a = solve(epsilon_eq, a)[0]
-pretty_print(a)
 
-pretty_print((T**2).subs('a', a))
+a = solve(epsilon_eq, a)[0]
+pretty_print(Eq(symbols('a'), a))
+pretty_print(Eq(symbols('T')**2, (T**2).subs('a', a)))
 
