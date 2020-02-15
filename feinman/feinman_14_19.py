@@ -61,3 +61,14 @@ T, _, _ = solve([
 ], T, sigma, v)[1]
 
 pretty_print(T**2)
+print('\n')
+
+print('c).')
+epsilon = symbols('epsilon')
+epsilon_eq = Eq(abs(epsilon), E/m)
+pretty_print(epsilon_eq)
+a = solve(epsilon_eq, a)[0]
+pretty_print(a)
+
+pretty_print((T**2).subs('a', a))
+
