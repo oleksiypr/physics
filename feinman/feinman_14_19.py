@@ -65,7 +65,7 @@ print('\n')
 
 print('c).')
 epsilon = symbols('epsilon')
-epsilon_eq = Eq(abs(epsilon), E/m)
+epsilon_eq = Eq(epsilon, E/m)
 pretty_print(epsilon_eq)
 a = solve(epsilon_eq, a)[0]
 pretty_print(a)
