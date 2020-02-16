@@ -69,4 +69,3 @@ pretty_print(epsilon_eq)
 a = solve(epsilon_eq, a)[0]
 pretty_print(Eq(symbols('a'), a))
 pretty_print(Eq(symbols('T')**2, (T**2).subs('a', a)))
-

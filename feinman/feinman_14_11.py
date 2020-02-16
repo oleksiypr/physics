@@ -17,7 +17,7 @@ res_v = solve([
         Eq(s1, v*sqrt(2)*t),
         Eq(v*sqrt(2), 2*g*t),
         Eq(delta_h, g * t**2 / 2),
-        Eq((v *sqrt(2)/2)**2, 2 * g * delta_h)
+        Eq((v * sqrt(2)/2)**2, 2 * g * delta_h)
     ], v, t, delta_h)[1]
 
 A = A.subs({"v": res_v[0]})
