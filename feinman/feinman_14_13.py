@@ -1,8 +1,10 @@
 import numpy as np
 import sympy as sym
 import matplotlib.pyplot as plt
-from sympy import symbols, pretty_print, Function, Eq, integrate, simplify, solve, Integral, Derivative, dsolve
-from sympy.interactive import init_printing
+from sympy import Function, Eq, Integral, Derivative
+from sympy import integrate, simplify, solve, dsolve
+from sympy import symbols
+from sympy import init_printing, pretty_print
 
 init_printing()
 
