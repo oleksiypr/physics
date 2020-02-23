@@ -1,6 +1,6 @@
 from sympy import Eq
 from sympy import init_printing, pretty_print
-from sympy import solve, sqrt, simplify
+from sympy import solve, sqrt
 from sympy import symbols
 
 init_printing()
@@ -10,7 +10,7 @@ init_printing()
 # v  -  spaceship speed on 'exit' from Solar system
 # Ms, Me - mass of the Sun and Earth resp
 # R, r   - Earth orbit radius and Earth radius
-ve, v, v0 = symbols('v_e, v v_0')
+ve, v, v0 = symbols('v_e v v_0')
 G, Ms, Me = symbols('G M_s M_e')
 R, r = symbols('R, r')
 
@@ -18,7 +18,7 @@ R, r = symbols('R, r')
 eq_E = Eq(ve**2/2 - G*Ms/R, - G*Ms/R/2)
 pretty_print(eq_E)
 
-# For the ship near the Earth
+# For the ship near the Earth and on "exit"
 eq_ship = Eq(v0**2/2 - G*Ms/R - G*Me/r, v**2/2)
 pretty_print(eq_ship)
 
