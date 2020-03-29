@@ -1,4 +1,4 @@
-from sympy import Eq, Function, Derivative
+from sympy import Eq, Function
 from sympy import init_printing, pretty_print
 from sympy import solve, simplify
 from sympy import symbols
