@@ -7,7 +7,7 @@ init_printing()
 
 x, rho, pi, r, R, G = symbols('x rho pi r R G')
 
-M     = Function('M')(r)
+M   = Function('M')(r)
 a_0 = Function('a_0')(x)
 a_1 = Function('a_1')(x)
 a_2 = Function('a_2')(x)
