@@ -1,10 +1,10 @@
 import sympy.physics.units as un
-from sympy import symbols, solve, Eq, pretty_print
+from sympy import symbols, Eq, pretty_print
 from sympy.interactive import init_printing
 from sympy.physics.units import Quantity
 from sympy.physics.units import convert_to
+
 from utils import *
-import numpy as np
 
 init_printing()
 
