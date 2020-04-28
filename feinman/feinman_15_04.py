@@ -3,7 +3,6 @@ from sympy import symbols, Eq, pretty_print
 from sympy.interactive import init_printing
 from sympy.physics.units import Quantity
 from sympy.physics.units import convert_to
-
 from utils import *
 
 init_printing()
@@ -40,11 +39,11 @@ set_quantity(M_D,   un.mass/un.amount_of_substance,  2.0147 * un.gram / un.mol)
 set_quantity(M_He4, un.mass/un.amount_of_substance,  4.0039 * un.gram / un.mol)
 set_quantity(M_O,   un.mass/un.amount_of_substance, 15.9990 * un.gram / un.mol)
 
-dm = 2*M_D - M_He4
-dm = convert_to(dm, un.gram / un.mol).n()
-print('dm = {}'.format(dm))
+dM = 2 * M_D - M_He4
+dM = convert_to(dM, un.gram / un.mol).n()
+print('dM = {}'.format(dM))
 
-v_He = m/dm
+v_He = m / dM
 v_He = convert_to(v_He, un.mol).n()
 
 v_D2O = v_He
