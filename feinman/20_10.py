@@ -1,3 +1,4 @@
+import numpy as np
 import sympy.physics.units as un
 from sympy.functions import *
 from sympy.physics.units import Quantity
@@ -29,9 +30,14 @@ ND = [[0, 1, 3, 5, 6, 8],
       [0, 0, 6, 0, 9, 0]]
 
 # Distances from the center of the Earth:
-rs = ND[0]
+rs = np.copy(ND[0])
+radius_intervals = list(zip(rs, rs[1:]))
+assert radius_intervals == [(0, 1), (1, 3), (3, 5), (5, 6), (6, 8)]
 
-intervals = [r2 - r1 for (r1, r2) in list(zip(rs, rs[1:]))]
-pretty_print(intervals)
+# Densities of the Earth
+rhos = np.copy(ND[1])
+rhos_intervals = [rho2 - rho1 for (rho1, rho2) in zip(rhos, rhos[1:])]
+assert rhos_intervals == [1, 1, 2, 1, 0]
 
-assert intervals == [1, 2, 2, 1, 2]
+for i in range(len(rhos)):
+      rho_breach = ND[2][i]
