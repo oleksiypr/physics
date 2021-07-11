@@ -22,7 +22,6 @@ R_E = get_quantity(Quantity("R_E"), un.length, R_E_km * un.km)
 R_km = (6356.912 + 6378.388) / 2
 R = get_quantity(Quantity("R"), un.length, R_km * un.km)
 
-
 # RD - is a table with raw data
 # Where:
 #    RD[0] - distances from the surface of the Earth, km
@@ -38,17 +37,17 @@ RD = [
 # ND - is a table of normalized raw data.
 # All the values are normalized to be integers.
 # Where:
-#    ND[0] - distances from the center of the Earth multiplied by 1000km, as integer
-#    ND[1] - densities at `r` multiplied by 1000g/cm^3, as integer
+#    ND[0] - distances from the center of the Earth in meters and casted as integer
+#    ND[1] - densities at `r` in multiplied in g/cm^3 multiplied by 1000 and casted as integer
 #    ND[2] - densities at 'breach', if value is 0, then no 'breach', as integer
 ND = 1000 * np.array(RD)    # normalize
 ND = ND.astype('i')         # as integer
 R_km_norm = int(1000 * R_km)
 
+# 'covert' depth to radius or distance from the center of the the Earth
+# r = R - D
 n = len(ND[0])
 ND[0] = (R_km_norm * np.ones(n)) - ND[0]
-
-pretty_print(ND)
 
 
 def radius_intervals_norm(nd):
@@ -78,9 +77,12 @@ Test_ND = [[0, 1, 3, 5, 6, 8],
 assert radius_intervals_norm(Test_ND) == [(0, 1), (1, 3), (3, 5), (5, 6), (6, 8)]
 assert rhos_intervals_norm(Test_ND)   == [(3, 4), (4, 5), (6, 7), (7, 8), (9, 8)]
 
-pretty_print(radius_intervals_norm(ND))
-pretty_print(rhos_intervals_norm(ND))
+# I(r1, r2) = 8/15 * pi * (r1**5 - r2**5) * rho(r1, r2)
+r2pow5_r1pow5 = [(float(r1)**5 - float(r2)**5) for (r1, r2) in radius_intervals_norm(ND)]
+rhos = [(rho1 + rho2)/2.0 for (rho1, rho2) in rhos_intervals_norm(ND)]
+rhos = np.array(rhos) / 1000
 
 
-
-
+moments_of_inertia_slices = r2pow5_r1pow5 * rhos
+moments_of_inertia_slices = 8/15 * np.pi * moments_of_inertia_slices
+pretty_print(moments_of_inertia_slices)
