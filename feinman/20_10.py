@@ -29,8 +29,8 @@ R = get_quantity(Quantity("R"), un.length, R_km * un.km)
 #    RD[2] - densities at 'breach', if value is 0, then no 'breach'
 RD = [
     [0.0, 30.0, 100.0, 200.0, 400.0, 1000.0, 2000.0, 2900.0, 3500.0, 5000.0, 6000.0],
-    [2.6, 3.0, 3.4, 3.5, 3.6, 4.7, 5.2, 5.7, 10.2, 11.5, 17.0],
-    [0.0, 3.3, 0.0, 0.0, 0.0, 0.0, 0.0, 9.4, 0.0, 16.8, 0.0]
+    [2.6,  3.0,   3.4,   3.5,   3.6,    4.7,    5.2,    5.7,   10.2,   11.5,   17.0],
+    [0.0,  3.3,   0.0,   0.0,   0.0,    0.0,    0.0,    9.4,    0.0,   16.8,    0.0]
 ]
 
 # Now lets play with raw data.
@@ -75,7 +75,7 @@ Test_ND = [[0, 1, 3, 5, 6, 8],
            [0, 0, 6, 0, 9, 0]]
 
 assert radius_intervals_norm(Test_ND) == [(0, 1), (1, 3), (3, 5), (5, 6), (6, 8)]
-assert rhos_intervals_norm(Test_ND) == [(3, 4), (4, 5), (6, 7), (7, 8), (9, 8)]
+assert rhos_intervals_norm(Test_ND)   == [(3, 4), (4, 5), (6, 7), (7, 8), (9, 8)]
 
 # I(r1, r2) = 8/15 * pi * (r1**5 - r2**5) * rho(r1, r2)
 r2pow5_r1pow5 = [(float(r1) ** 5 - float(r2) ** 5) for (r1, r2) in radius_intervals_norm(ND)]
