@@ -42,4 +42,16 @@ I_2 = M*r**2 /2
 v_2 = v.subs(I_0, I_2)
 pretty_print(Eq(symbols('v_2'), v_2))
 
+print('c) disk of mass M_1 and radius R_1 on the shaft with mass m_2 and radius r_2')
+M_1, m_2 = symbols('M_1 m_2', positive=True)
+R_1, r_2 = symbols('R_1 r_2', positive=True)
 
+I_3 = (M_1 * R_1**2)/2 + (m_2 * r_2**2)/2
+v_3 = v.subs({
+    I_0: I_3,
+    r: R_1,
+    M: M_1 + m_2
+})
+
+assert simplify(sqrt(2*(M_1 + m_2)*g*h/(3*M_1/2 + m_2*(1 + r_2**2/R_1**2/2))) - v_3) == 0
+pretty_print(Eq(symbols('v_3'), simplify(v_3)))
