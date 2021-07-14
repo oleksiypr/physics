@@ -6,14 +6,16 @@ init_printing()
 h   = symbols('h')      # the heights the body stated rolling from
 I_0 = symbols('I_0')    # moment of inertia relative (axis) center of gravity
 M   = symbols('M')      # the mass
-r   = symbols('r')      # radius of the body surface in contact with the plane
+r   = symbols('r', positive=True)      # radius of the body surface in contact with the plane
 g   = symbols('g')      # gravity of Earth
 # //@formatter:on
 
 print('1). Linear speed of the center of gravity at the end')
 
+# //@formatter:off
 omega = symbols('omega')
 v     = omega * r
+# //@formatter:on
 
 eq_energy_conservation = Eq(
     M*g*h,
@@ -31,7 +33,8 @@ print('2). Apply above for cases:')
 print('a) sphere')
 
 I_1 = 2 * M*r**2 / 3  # sphere
-v_1 = simplify(v.subs(I_0, I_1))
+v_1 = v.subs(I_0, I_1)
+assert v_1 == sqrt(6 * g*h / 5)
 pretty_print(Eq(symbols('v_1'), v_1))
 
 
