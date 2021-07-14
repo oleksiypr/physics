@@ -39,14 +39,15 @@ RD = [
 #    ND[0] - distances from the center of the Earth in meters and casted as integer
 #    ND[1] - densities at `r` in multiplied in g/cm^3 multiplied by 1000 and casted as integer
 #    ND[2] - densities at 'breach', if value is 0, then no 'breach', as integer
+# //@formatter:off
 ND = 1000 * np.array(RD)  # normalize
-ND = ND.astype('i')  # as integer
+ND = ND.astype('i')       # as integer
 R_km_norm = int(1000 * R_km)
+# //@formatter:off
 
 # 'covert' depth to radius or distance from the center of the the Earth
 # r = R - D
-n = len(ND[0])
-ND[0] = (R_km_norm * np.ones(n)) - ND[0]
+ND[0] = (R_km_norm * np.ones(len(ND[0]))) - ND[0]
 
 
 def radius_intervals_norm(nd):
