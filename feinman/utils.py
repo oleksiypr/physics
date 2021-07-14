@@ -25,7 +25,7 @@ def set_quantity(quantity, dimension, scale_factor):
         86.0*kilogram
 
     :param quantity: physical quantity, for example length, mass or energy
-    :param dimension: `meter, hour, joule, ...` based on sympy.physics.units
+    :param dimension: time, length, mass ... based on sympy.physics.units
     :param scale_factor: value to be set to `quantity` parameter
     """
     SI.set_quantity_dimension(quantity, dimension)
@@ -50,7 +50,7 @@ def get_quantity(quantity, dimension, scale_factor):
         1.0*meter/second
 
     :param quantity: physical quantity, for example length, mass or energy
-    :param dimension: `meter, hour, joule, ...` based on sympy.physics.units
+    :param dimension: time, length, mass ... based on sympy.physics.units
     :param scale_factor: value to be set to `quantity` parameter
     :return: quantity with parameters preset
     """

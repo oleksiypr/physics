@@ -1,12 +1,9 @@
-from typing import List, Any, Tuple
-
 import numpy as np
 import sympy.physics.units as un
-from sympy.functions import *
 from sympy.physics.units import Quantity
 from utils import *
 from sympy.physics.units import convert_to
-from sympy import init_printing, pretty_print
+from sympy import init_printing, pretty_print, Eq, Symbol
 
 init_printing()
 
@@ -27,11 +24,13 @@ R = get_quantity(Quantity("R"), un.length, R_km * un.km)
 #    RD[0] - distances from the surface of the Earth, km
 #    RD[1] - densities at depth from above row, g/cm^3
 #    RD[2] - densities at 'breach', if value is 0, then no 'breach'
+# //@formatter:off
 RD = [
     [0.0, 30.0, 100.0, 200.0, 400.0, 1000.0, 2000.0, 2900.0, 3500.0, 5000.0, 6000.0],
     [2.6,  3.0,   3.4,   3.5,   3.6,    4.7,    5.2,    5.7,   10.2,   11.5,   17.0],
     [0.0,  3.3,   0.0,   0.0,   0.0,    0.0,    0.0,    9.4,    0.0,   16.8,    0.0]
 ]
+# //@formatter:on
 
 # Now lets play with raw data.
 # ND - is a table of normalized raw data.
@@ -75,7 +74,7 @@ Test_ND = [[0, 1, 3, 5, 6, 8],
            [0, 0, 6, 0, 9, 0]]
 
 assert radius_intervals_norm(Test_ND) == [(0, 1), (1, 3), (3, 5), (5, 6), (6, 8)]
-assert rhos_intervals_norm(Test_ND)   == [(3, 4), (4, 5), (6, 7), (7, 8), (9, 8)]
+assert rhos_intervals_norm(Test_ND) == [(3, 4), (4, 5), (6, 7), (7, 8), (9, 8)]
 
 # I(r1, r2) = 8/15 * pi * (r1**5 - r2**5) * rho(r1, r2)
 r2pow5_r1pow5 = [(float(r1) ** 5 - float(r2) ** 5) for (r1, r2) in radius_intervals_norm(ND)]
@@ -89,14 +88,36 @@ pretty_print(moments_of_inertia_slices)
 
 # sum slices up:
 I_m5_g_per_cm3 = np.sum(moments_of_inertia_slices)
-print('I = {} m^5*g/cm^3'.format(I_m5_g_per_cm3))
+print('I_ns = {} m^5*g/cm^3'.format(I_m5_g_per_cm3))
 
 # Moment of inertia of the Earth relative to NS axis
-I_NS = get_quantity(
-    Quantity("I_E"),
+I_ns = get_quantity(
+    Quantity("I_ns"),
     un.mass * un.length ** 2,
     I_m5_g_per_cm3 * un.m ** 5 * un.gram / un.cm ** 3
 )
 
-I_NS = convert_to(I_NS, un.kg * un.m**2).n()
-pretty_print(I_NS)
+print("a)")
+pretty_print(Eq(Symbol("I_ns"), convert_to(I_ns, un.kg * un.m ** 2).n()))
+
+print("b)")
+# angular speed of the Earth, rad/s:
+omega = get_quantity(
+    Quantity("omega"),
+    np.angle / un.time, 2 * np.pi / (24 * 3600) * un.radians / un.second
+)
+
+# angular momentum of the Earth:
+L = I_ns * omega
+pretty_print(
+    Eq(Symbol("L"),
+       convert_to(L, un.kg * un.m ** 2 / un.s).n())
+)
+
+print("c)")
+# Kinetic Energy of the Earth rotation:
+T = I_ns * omega**2 / 2
+pretty_print(
+    Eq(Symbol("T"),
+       convert_to(T, un.joules).n())
+)
