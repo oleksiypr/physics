@@ -37,5 +37,9 @@ v_1 = v.subs(I_0, I_1)
 assert v_1 == sqrt(6 * g*h / 5)
 pretty_print(Eq(symbols('v_1'), v_1))
 
+print('b) disk')
+I_2 = M*r**2 /2
+v_2 = v.subs(I_0, I_2)
+pretty_print(Eq(symbols('v_2'), v_2))
 
 
