@@ -3,7 +3,7 @@ import sympy.physics.units as un
 from sympy.physics.units import Quantity
 from utils import *
 from sympy.physics.units import convert_to
-from sympy import init_printing, pretty_print, Eq, Symbol
+from sympy import *
 
 init_printing()
 
@@ -111,7 +111,7 @@ omega = get_quantity(
 # angular momentum of the Earth:
 L = I_ns * omega
 pretty_print(
-    Eq(Symbol("L"),
+    Eq(symbols("L"),
        convert_to(L, un.kg * un.m ** 2 / un.s).n())
 )
 
@@ -119,6 +119,6 @@ print("c)")
 # Kinetic Energy of the Earth rotation:
 T = I_ns * omega**2 / 2
 pretty_print(
-    Eq(Symbol("T"),
+    Eq(symbols("T"),
        convert_to(T, un.joules).n())
 )
