@@ -3,11 +3,11 @@ from sympy import *
 init_printing()
 
 # //@formatter:off
-h   = symbols('h')      # the heights the body stated rolling from
-I_0 = symbols('I_0')    # moment of inertia relative (axis) center of gravity
-M   = symbols('M')      # the mass
-r   = symbols('r', positive=True)      # radius of the body surface in contact with the plane
-g   = symbols('g')      # gravity of Earth
+h   = symbols('h')                  # the heights the body stated rolling from
+I_0 = symbols('I_0')                # moment of inertia relative (axis) center of gravity
+M   = symbols('M')                  # the mass
+r   = symbols('r', positive=True)   # radius of the body surface in contact with the plane
+g   = symbols('g')                  # gravity of Earth
 # //@formatter:on
 
 print('1). Linear speed of the center of gravity at the end')

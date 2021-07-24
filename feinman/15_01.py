@@ -1,6 +1,6 @@
 from sympy import Eq
 from sympy import init_printing, pretty_print
-from sympy import solve, simplify, sqrt
+from sympy import solve, simplify, sqrt, factor
 from sympy import symbols
 
 init_printing()
@@ -30,6 +30,8 @@ pretty_print(Eq(t, res_t))
 
 _, eq_x_rhs = eq_x.args
 _, eq_t_rhs = eq_t.args
+
+pretty_print(factor(res_x, a))
 
 assert simplify(eq_x_rhs.subs({
     x: x_, t: t_, u: -u
