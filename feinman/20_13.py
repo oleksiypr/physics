@@ -4,17 +4,17 @@ import numpy as np
 init_printing()
 
 # //@formatter:off
-h       = 60.                 # meters, the sea level increase after ice got melted
+h       = 61.                 # meters, the sea level increase after ice got melted
 phi_ice = 80.                 # degrees, an average latitude of the ice
 phi_ice = np.radians(phi_ice) # radians, an average latitude of the ice
 
-R     = 6730.  # kilometers, the Earth radius
+R     = 6370.  # kilometers, the Earth radius
 rho_w = 1000.  # kg/m^3, density of the water
 
 omega_0 = 2 * np.pi / 24    # rad/hour, the Earth rotation
 omega_0 =   omega_0 / 3600  # rad/sec, the Earth rotation
 
-I0 = 8.23e11    # kg*m^2, the Earth moment of inertia
+I0 = 8.11e37    # kg*m^2, the Earth moment of inertia
 # //@formatter:on
 
 # The equation of the Earth rotation change after the ice got melted:
@@ -33,11 +33,10 @@ m = 4 * np.pi * rho_w * R**2 * h
 
 # a change of the Earth rotation, rad/sec:
 delta_omega = - omega_0 * m*R**2 * (6 - 5*np.cos(phi_ice)**2) / (15*I0)
-print(delta_omega)
 
 
 # a change of the Earth rotation period, seconds:
 delta_T = - 2*np.pi / omega_0**2 * delta_omega
 
-print('A change of the Earth rotation period, seconds: {0:.1f} sec'.format(delta_T))
+print('A change of the Earth rotation period, seconds: {0:.3f} sec'.format(delta_T))
 
